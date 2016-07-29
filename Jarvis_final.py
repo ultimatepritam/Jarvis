@@ -8,8 +8,8 @@ import pyaudio
 import speech_recognition as sr
 import os
 import random
-import socket													#Copyright Protected under MIT LICENSE 
-import webbrowser												#facebook.com/ultimatepritam #alientrix.blogspot.com
+import socket							#Copyright Protected under MIT LICENSE 
+import webbrowser							#facebook.com/ultimatepritam #alientrix.blogspot.com
 import subprocess
 import glob
 from time import localtime, strftime
