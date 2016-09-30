@@ -98,7 +98,7 @@ while (i<1):
         elif ('hello') in message or ('hi') in message:
             rand = ['Welcome to Jarvis artificial intelligence project. At your service sir.']
             speak(rand)
-            
+            #SUBHAM SAHA EMAIL: subhams087@gmail.com
         elif ('register me')in message:
             speak('ok! what is your name sir?')
             r = sr.Recognizer()
