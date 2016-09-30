@@ -328,7 +328,7 @@ while (i<1):
                 speak(rand)
                 subprocess.call(["C:\Program Files (x86)\Dragonball Xenoverse\DBXV.exe"])
                 
-    
+    # @AMIT KUMAR | EMAIL: kumaramit.rude@gmail.com
         elif message !=("daddy's home") and ('add') in message :
                   input = message
                   (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
