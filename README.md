@@ -1,2 +1,13 @@
-# Jarvis
-Jarvis Artificial Intelligence Project in Python
+time
+random
+pycountry
+os
+wikipedia
+weather
+re
+pyjokes
+requests
+webbrowser
+glob
+PyDictionary
+tmdb
