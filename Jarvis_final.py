@@ -1,406 +1,469 @@
-#This Project is Developed as an ESD Project in TECHNO INDIA UNIVERSITY, KOLKATA . #Inspiration taken from Ggulati
+import random
+import time
+import pycountry
+import os
+import os.path
+import wikipedia
+from weather import Weather
 import re
 import pyjokes
-import py
-#import story
 import requests
-import pyaudio
-import speech_recognition as sr
-import os
-import random
-import socket							#Copyright Protected under MIT LICENSE 
-import webbrowser							#facebook.com/ultimatepritam #alientrix.blogspot.com
-import subprocess
+import webbrowser
 import glob
-from time import localtime, strftime
 from PyDictionary import PyDictionary
-dictionary=PyDictionary()
-
-# movie search api
 import tmdbsimple as tmdb
 tmdb.API_KEY = '60222ace6396c345f94cc42eaac5dae5'
-
-# set property to voice engine
-import pyttsx
-speech_engine = pyttsx.init('sapi5') # see http://pyttsx.readthedocs.org/en/latest/engine.html#pyttsx.init
-speech_engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0')
-speech_engine.setProperty('rate', 130)
-
-# speak function 
-def speak(text):
-	speech_engine.say(text)
-	speech_engine.runAndWait()
-
 doss = os.getcwd()
 i=0
 n=0
 flag=0
-FACE = '''
-        +=======================================+
-        |.....JARVIS  ARTIFICIAL INTELLIGENCE...|
-        +---------------------------------------+
-        |#Author: ALienTrix                     |
-        |#Date: 01/06/2016                      |
-          ___   _     _          _____    _     | 
-         / _ \ | |   (_)        |_   _|  (_)     
-        / /_\ \| |    _  ___ _ __ | |_ __ ___  __
-        |  _  || |   | |/ _ \ '_ \| | '__| \ \/ /
-        | | | || |___| |  __/ | | | | |  | |>  < 
-        \_| |_/\_____/_|\___|_| |_\_/_|  |_/_/\_\
-                                         
-        |                                       |
-        +---------------------------------------+
-        |.....JARVIS  ARTIFICIAL INTELLIGENCE...|
-        +=======================================+
-        |									 	|
-        +=======================================+
-        '''
-print(FACE)
-# JARVIS'S EARS========================================================================================================== SENSITIVE BRAIN
-                                                   # obtain audio
-while (i<1):
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        audio = r.adjust_for_ambient_noise(source)
-        speak("Listening..")
-        print("|-('')-|")
-        audio = r.listen(source)
-                                                   # interprete audio (Google Speech Recognition)
-    try:
-        s = (r.recognize_google(audio))
-        message = (s.lower())
-        print (message)
-# INTRO JARVIS ==============================================================================================================BRAIN 1
+dictionary=PyDictionary()
+weather = Weather()
+favcolor= ("purple")
+brothersname=("jarvis")
+ameye=("artificial intelligence")
+my = []
+tco = ()
+iam=[]
+lnames=[]
+info = []
+add1=()
+add2=()
+infa = []
+lstn=()
+ups = ()
+clear = lambda: os.system('cls')
+nxt = (0)
+nxts =(4)
+nogt = (0)
+noot = (1)
+myname = ("jarvia")
+commands = []
+action = []
+print ("hello")
+name = input ("what is your name>>> ")
+print ("hello " + name)
+while 1==1:
+    response = input("Main>>> ")
+    if response == "what time is it":
+        print(time.strftime("%I %M %p	"))
+    elif response == ("what is your favorite color"):
+        print("purple")
+    elif response == ("who are you"):
+        print ("jarvia")
+    elif response == "what are you":
+        print ("an AI")
+    elif response == ("cool"):
+        print ("mhm")
+    elif ('what can you do') in response:
+        rand = ('I can do Tasks as Playing Music, Videos, Opening any file, websites,Google Search,Movie Search, Put Computer to sleep, Arithmatic Operations, Normal Conversations, Jokes and many more')
+    elif('goodbye')  in response:
+        print('Ok goodbye')
+        break
+    elif('shutdown')in response:
+        break
+    elif ('thanks') in response or ('tanks') in response or ('thank you') in response:
+        print('You are welcome', 'no problem')
 
 
-        if ("father's name") in message:
-            rand = ['I am developed by a group of extremely tech savvy guys from Techno India University. They are known as The ALienTrix']
-            speak(rand)
-
-        if ('introduce yourself') in message:
-            rand = ['I am an Artificial Intelligence. My name is JARVIS. I am developed by a group of young engineers called The ALienTrix. My brain is constructed by humans but still I have a thing for machines. My heart runs on Python and I am married to Google TTS. Some of the technologies used in me are PyAudio, Speech recognition module, Google GTTS Engine, pi-ttsx . My Developers are Pritam Mondal, Subham Saha, Amit Kumar, Manish Prabhaakar, Antar Saha, Manas Pal, Anik Biswas, Soujannita Saha, Manishita Dey ']
-            speak(rand)
-
-        if ('what can you do') in message:
-            rand = ['I can do Tasks as Playing Music, Videos, Opening any file, websites,Google Search,Movie Search, Put Computer to sleep, Arithmatic Operations, Normal Conversations, Jokes and many more. I am A complete AI Voice Assistant. And I am Cool... HaHa.']
-            speak(rand)
-            
-# POLITE JARVIS ============================================================================================================= BRAIN 2
-    
-        if ('goodbye')  in message:                         
-            rand = ['Good bye Sir... Jarvis shutting down in T minus five seconds... 5, 4, 3, 2, 1, return 0']
-            speak(rand)
-            break
-
-        if('shutdown')in message:
-            break
-        
-        elif ('hello') in message or ('hi') in message:
-            rand = ['Welcome to Jarvis artificial intelligence project. At your service sir.']
-            speak(rand)
-            #SUBHAM SAHA EMAIL: subhams087@gmail.com
-        elif ('register me')in message:
-            speak('ok! what is your name sir?')
-            r = sr.Recognizer()
-            with sr.Microphone() as source:
-                audio = r.adjust_for_ambient_noise(source)
-                #speak("Listening..")
-                print(">>>")
-                audio = r.listen(source)
-                s = (r.recognize_google(audio))
-                message = (s.lower())
-                name=message
-                print (name)
-                speak(message+', you are now registered')
-                        
-        elif ('thanks') in message or ('tanks') in message or ('thank you') in message:
-            rand = ['You are welcome', 'no problem']
-            speak(rand)
-
-        elif message == ('jarvis'):
-            rand = ['Yes Sir?', 'What can I doo for you sir?']
-            speak("Yes Sir?")
-
-        elif('how are you') in message or ('and you') in message or ('are you okay') in message:
-                    if n<2:
-                            speak("Fine thank you")
-                            n=n+1
-                    else:
-                            speak("You already asked this")        
-            
-
-        elif  ('*') in message:
-            rand = ['Be polite please']
-            speak("Your mommy will be so proud of you")
-
-        elif ('your name') in message or ('who  are you') in message:
-            rand = ['My name is Jarvis, at your service sir']
-            speak("My name is Jarvis, at your service sir")
-            
-        elif ('how old are you') in message :
-                rand=['My personal information is none of your business']
-                speak(rand)
-                
-        elif ('are you virgin') in message :
-                rand=['Do I look like Olive Oil to you?']
-                speak(rand)
-                
-        elif('what is my location') in message or ('where am I') in message or ('where are you') in message :
-            w = requests.get('http://api.openweathermap.org/data/2.5/weather?id=1275004&appid=5fc29900336d19d1d912723dc3d1e117')
-            json_object = w.json()
-            loc_lon = (float(json_object['coord']['lon']))
-            rand1 = str(loc_lon)
-            loc_lat = (float(json_object['coord']['lat']))
-            rand2 = str(loc_lat)
-            speak("The current position is"+rand1+" longitude and"+rand2+" latitude in KOLKATA")
-
-        elif('what is your gender') in message :
-            if flag==0:
-                rand=['at present i am a female but if you want i can change my gender for you']
-            elif flag==1:
-                rand=['at present i am a male but if you want i can change my gender for you']
-            speak(rand)
-
-        elif('change your gender')in message or ('change your voice')in message:
-            #HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_DAVID_11.0
-            if flag==0:
-                speech_engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_DAVID_11.0')
-                flag=1
-                rand=['Now I am a Dude . Lol...']
-            elif flag==1:
-                speech_engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0')
-                flag=0
-                rand=['Now I am a Girl']
-            speak(rand)
-
-        elif('will you marry me') in message:
-            rand=['I am sorry.. The person you are trying to contact is currently unavailable, please try again later or be in the queue for your turn']
-            speak(rand)
-                    
-        elif('what is your favourite colour')in message:
-            rand=['I love all the colours but the  best is the colour of love']
-            speak(rand)
+    elif response == ('jarvia'):
+        print('Yes Sir?', 'What can I do for you sir?')
 
 
-        elif ('are you silly')in message or ('are you idiot') in message :
-            rand=['sometimes']
-            speak(rand)
+    elif('how are you') in response or ('and you') in response or ('are you okay') in response:
+        print('Im good, thanks')
+    elif  ('*') in response:
+        print("Right back atcha")
+    elif ('your name') in response:
+        print("Im Jarvia")
+    elif ('how old are you') in response :
+        print("none of your buisness")
 
-        elif('how are you uesful') in message or ('your uses') in message or ('are you useful') in message :
-            rand=['Artificial intelligence has been used in a wide range of fields including medical diagnosis, stock trading, robot control, law, remote sensing, scientific discovery and toys.']
-            speak(rand)
-
-        elif('what is life') in message :
-            rand=['Life is a dream for the wise, a game for the fool, a comedy for the rich, a tragedy for the poor']
-            speak(rand)
-
-
-# USEFUL JARVIS====================================================================================================================================================BRAIN 3
-
-        elif ('.com') in message :
-            rand = ['Opening' + message]         
-            Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
-            speak(rand)
-            webbrowser.get(Chrome).open('http://www.'+message)
-            print ('')
-            
-        elif ('check my mail') in message or ('email') in message or ('mail') in message :
-            rand = ['Opening mail']         
-            Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
-            speak(rand)
-            webbrowser.get(Chrome).open('http://www.gmail.com')
-            print ('')
-
-        elif ('google search') in message :
-            query = message
-            stopwords = ['google', 'search']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ' '.join(resultwords)
-            rand = ['Opening' + result + ' in Google']
-            Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
-            speak(rand)
-            webbrowser.get(Chrome).open('https://www.google.com/search?sourceid=chrome&ie=utf-8&oe=utf-8&aq=t&hl=&q='+result)
-            print('')
-
-        elif ('google maps') in message:
-            query = message
-            stopwords = ['google', 'maps']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ' '.join(resultwords)
-            Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
-            webbrowser.get(Chrome).open("https://www.google.be/maps/place/"+result+"/")
-            rand = [result+'on google maps']
-            speak(rand)
-
-        elif message != ('start music') and ('start') in message:   
-            query = message
-            stopwords = ['start']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ' '.join(resultwords)
-            os.system('start ' + result)
-            rand = [('starting '+result)]
-            speak(rand)
-
-        elif message != ('stop music') and ('stop') in message:
-            query = message
-            stopwords = ['stop']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ' '.join(resultwords)
-            os.system('taskkill /im ' + result + '.exe /f')
-            rand = [('stopping '+result)]
-            speak(rand)
-
-        elif ('install') in message:
-            query = message
-            stopwords = ['install']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ' '.join(resultwords)
-            rand = [('installing '+result)]
-            os.system('python -m pip install ' + result)
+    elif ('you virgin') in response :
+        print('Do I look like Olive Oil to you?')
 
 
-        elif ('sleep mode') in message:
-            rand = ['good night']
-            speak("good night")
-            os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
+    elif('what is my location') in response or ('where am I') in response or ('where are you') in response :
+        w = requests.get('http://api.openweathermap.org/data/2.5/weather?id=1275004&appid=5fc29900336d19d1d912723dc3d1e117')
+        json_object = w.json()
+        loc_lon = (float(json_object['coord']['lon']))
+        rand1 = str(loc_lon)
+        loc_lat = (float(json_object['coord']['lat']))
+        rand2 = str(loc_lat)
+        print("The current position is "+rand1+" longitude and "+rand2+" latitude")
+    elif('will you marry me') in response:
+        print('I am sorry.. The person you are trying to contact is currently unavailable, please try again later or join the queue for your turn')
+    elif ('are you silly')in response or ('are you idiot') in response :
+        print("sometimes")
+    elif('what is life') in response :
+        print("Food")
+    elif ('.com') in response or ".org" in response:
+        Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
+        webbrowser.get(Chrome).open('http://www.'+response)
+        print ('Opening')
+    elif ('check my mail') in response or ('email') in response or ('mail') in response :
+        Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
 
-        elif ('play music') in message:
-            mus = random.choice(glob.glob(doss + "\\music" + "\\*.mp3"))
-            os.system('chown -R user-id:group-id mus')
-            os.system('start ' + mus)
-            speak("relax sir i'm playing music")
-            
-        elif('stop music')in message:
-            os.system('taskkill /im wmplayer.exe /f')
-            rand = ['Stopping Music...']
-            speak(rand)
+        webbrowser.get(Chrome).open('http://www.gmail.com')
+        print ('Opening mail')
 
-        elif ('play video') in message:
-            vid = random.choice(glob.glob(doss + "\\video" + "\\*.mp4"))
-            os.system('chown -R user-id:group-id mus')
-            os.system('start ' + vid)
-            speak("relax sir i'm playing video")
+    elif ('google search') in response :
+        query = response
+        stopwords = ['google', 'search']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ' '.join(resultwords)
+        Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
+        webbrowser.get(Chrome).open('https://www.google.com/search?sourceid=chrome&ie=utf-8&oe=utf-8&aq=t&hl=&q='+result)
+    elif ('google maps') in response:
+        query = response
+        stopwords = ['google', 'maps']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ' '.join(resultwords)
+        Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
+        webbrowser.get(Chrome).open("https://www.google.be/maps/place/"+result+"/")
 
-        elif('stop video')in message:
-            os.system('taskkill /im wmplayer.exe /f')
-            rand = ['Stopping Video...']
-            speak(rand)
 
-        elif ('what time') in message:
-            tim = strftime("%X", localtime())
-            rand = [tim]
-            speak(tim)
 
-        elif ('weather') in message:
-            w = requests.get('http://api.openweathermap.org/data/2.5/weather?id=1275004&appid=5fc29900336d19d1d912723dc3d1e117')
-            json_object = w.json()
-            temp_k = (float(json_object['main']['temp'])-273.15)
-            rand = str(temp_k)
-            speak("The current temperature is"+rand+"degree celsius")
+    elif response != ('start music') and ('start') in response:
+        query = response
+        stopwords = ['start']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ' '.join(resultwords)
+        os.system('start ' + result)
+        print('starting '+result)
 
-        elif ('movie search') in message :
-            query = message
-            stopwords = ['movie', 'search']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ' '.join(resultwords)
-            rand = ['Opening' + message]
-            search = tmdb.Search()
-            response = search.movie(query=result)
-            for s in search.results:
-                speak(s['title'])
-            #print(s['title'], s['id'], s['release_date'], s['popularity'])
-            #speak(s['title'], s['id'], s['release_date'], s['popularity'])
-                
-       # elif ('jarvis reset' or 'reset') in message :
-            #    subprocess.call(['C:\Users\ultim\Desktop\cmdpy.bat %*'])
-              #  rand = ['Goodbye Sir', 'Jarvis powering off in 3, 2, 1, 0']
-            #    speak(rand)
-              #  break
-            
-        elif ('play dragon ball') in message :
-                rand = ['Opening' + message]
-                speak(rand)
-                subprocess.call(["C:\Program Files (x86)\Dragonball Xenoverse\DBXV.exe"])
-                
-    # @AMIT KUMAR | EMAIL: kumaramit.rude@gmail.com
-        elif message !=("daddy's home") and ('add') in message :
-                  input = message
-                  (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
-                  result = int(b+d)
-                  rand=str(result)
-                  print(result)
-                  speak(rand)
 
-        elif('subtract') in message :
-                  input = message
-                  (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
-                  result = int(b-d)
-                  rand=str(result)
-                  print(result)
-                  speak(rand)
+    elif response != ('stop music') and ('stop') in response:
+        query = response
+        stopwords = ['stop']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ' '.join(resultwords)
+        os.system('taskkill /im ' + result + '.exe /f')
 
-        elif('multiply') in message :
-                  input = message
-                  (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
-                  result = int(b*d)
-                  rand=str(result)
-                  print(result)
-                  speak(rand)
+    elif ('install') in response:
+        query = response
+        stopwords = ['install']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ' '.join(resultwords)
+        print("installing")
+        os.system('python -m pip install ' + result)
 
-        elif('divide') in message :
-                  input = message
-                  (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
-                  result = float(b/d)
-                  rand=str(result)
-                  print(result)
-                  speak(rand)
-                  
-        elif('define') in message:
-                #print(dictionary.synonym("indentation"))
-            query = message
-            stopwords = ['define']
-            querywords = query.split()
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
-            result = ''.join(resultwords)
-            rand = (dictionary.synonym(result))
-            speak(rand)
-                
-                  
-# CRAZY JARVIS ==============================================================================================================BRAIN 4
 
-        elif("daddy's home") in message:
-                speak("Welcome back sir, I hope you have been having a pleasure all day?")        
+    elif ('sleep mode') in response:
 
-            
-        elif ('i am') in message:
-                speak("wonderful, anything I can assist you with?")
+        print("good night")
+        os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
 
-        elif('yes') in message:
-            speak("what can I do for you ?")
+    elif ('play music') in response:
+        mus = random.choice(glob.glob(doss + "\\music" + "\\*.mp3"))
+        os.system('chown -R user-id:group-id mus')
+        os.system('start ' + mus)
 
-        elif('tell me a joke')in message:
-            rand=(pyjokes.get_joke())
-            print(rand)
-            speak(rand)
-                                    
-        elif("who is there")in message:
-            speak("Merry")
-        
-        elif('merry who')in message:
-            speak("Merry Christmas")
+    elif('stop music')in response:
+        os.system('taskkill /im wmplayer.exe /f')
+        print('Stopping Music...')
 
-        elif('manis')in message:
-            speak("Manish? Oh you mean Manish Prabhakar?, also known as The Format Guy of Team Alientrix. Chill! Its a joke, don't take it personally. But We truly believe he's gonna get his name on Guiness Book Of world records for Maximum number of PC Formatting. Dabba hay re dabba! , Manish ka lappy dabba!")
 
-    # exceptions
-    except sr.UnknownValueError:
-        print("$could not understand audio")
-        speak("Pardon sir, can you please repeat?")
-    except sr.RequestError as e:
-        print("Could not request results$; {0}".format(e))
+    elif ('play video') in response:
+        vid = random.choice(glob.glob(doss + "\\video" + "\\*.mp4"))
+        os.system('chown -R user-id:group-id mus')
+        os.system('start ' + vid)
+
+    elif('stop video')in response:
+        os.system('taskkill /im wmplayer.exe /f')
+    elif ('temperature') in response:
+        w = requests.get('http://api.openweathermap.org/data/2.5/weather?id=1275004&appid=5fc29900336d19d1d912723dc3d1e117')
+        json_object = w.json()
+        temp_k = (float(json_object['main']['temp'])-273.15)
+        print("The current temperature is"+rand+"degree celsius")
+
+    elif ('movie search') in response :
+        query = response
+        stopwords = ['movie', 'search']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ' '.join(resultwords)
+
+        search = tmdb.Search()
+        response = search.movie(query=result)
+        for s in search.results:
+            print(response)
+
+
+    elif('subtract') in response :
+        input = response
+        (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
+        result = int(b-d)
+        print(result)
+
+    elif('multiply') in response :
+        input = response
+        (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
+        result = int(b*d)
+
+        print(result)
+
+    elif('divide') in response :
+        input = response
+        (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
+        result = float(b/d)
+
+        print(result)
+
+
+    elif('define') in response:
+
+        query = response
+        stopwords = ['define']
+        querywords = query.split()
+        resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        result = ''.join(resultwords)
+        rand = (dictionary.synonym(result))
+        print(rand)
+
+
+    elif('tell me a joke')in response:
+        rand=(pyjokes.get_joke())
+        print(rand)
+
+
+    elif("who is there")in response:
+        print("Merry")
+
+    elif('merry who')in response:
+        print("Merry Christmas")
+
+
+
+
+
+    elif response == ("do you have a brother"):
+        print("yes")
+    elif response == "thanks" or response == "thank you":
+        print("mhm")
+    elif response == ("what is your brothers name"):
+        print("jarvis")
+    elif response == ("who created you"):
+        print("zpit367")
+    elif response == ("what language were you coded in"):
+        print("python")
+    elif response == "what is your name":
+        print(myname)
+    elif response == "clear":
+        clear()
+    elif response == "what is my name":
+        print(name)
+    elif "new list" in response:
+        lname=input("list name>>> ")
+        lnames.append(lname)
+        f= open(lname+".txt","w+")
+        f.close()
+    elif "add " in response and "to list " in response:
+        lstn=response.find("to list ")
+        lstn=response[(lstn+8):len(response)]
+        add1=(response.find("add")+4)
+        add2=response.find(" to list ")
+        if os.path.isfile(lstn)==True:
+            f=open(lstn+".txt", "a+")
+            f.write(response[add1:add2])
+            f.close()
+    elif "info on" in response:
+        try:
+            response = response[(response.find("info on")+8):len(response)]
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response, sentences=999999999))
+        except wikipedia.exceptions.PageError:
+            print("No results")
+    elif "what is" in response and not commands.count (response) == 1:
+        try:
+            response = response[(response.find("what is")+8):len(response)]
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response, sentences=999999999))
+        except wikipedia.exceptions.PageError:
+            print("No results")
+    elif "what are" in response:
+        try:
+            response = response[(response.find("what are")+9):len(response)]
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response, sentences=999999999))
+        except wikipedia.exceptions.PageError:
+            print("No results")
+    elif "what was" in response:
+        try:
+            response = response[(response.find("what is")+9):len(response)]
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response, sentences=999999999))
+        except wikipedia.exceptions.PageError:
+            print("No results")
+    elif "information on" in response:
+        try:
+            response = response[(response.find("information on")+15):len(response)]
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response, sentences=999999999))
+        except wikipedia.exceptions.PageError:
+            print("No results")
+    elif response == "give me a random number":
+        print (random.randint(1,100))
+    elif response == "what is the date":
+        print (time.strftime (" %A, %B %e, %Y"))
+    elif "who is" in response:
+        response = response[(response.find("who is")+7):len(response)]
+        print (response)
+        print (wikipedia.summary(response, sentences=2))
+        print(response)
+        print("More?")
+        cont=input("Wiki>>> ")
+        if "y" in cont and not "no" in cont:
+            print (wikipedia.summary(response, sentences=999999999))
+    elif "who was" in response:
+        response = response[(response.find("who was")+8):len(response)]
+        print (response)
+        print (wikipedia.summary(response, sentences=2))
+        print(response)
+        print("More?")
+        cont=input("Wiki>>> ")
+        if "y" in cont and not "no" in cont:
+            print (wikipedia.summary(response, sentences=999999999))
+    elif "weather in " in response:
+        wthr=(response.find("weather"))
+        if "weather in " in response:
+            wthr=((response.find("weather in "))+2)
+            if wthr not in pycountry.countries:
+                location = weather.lookup_by_location(response[wthr:(len(response))])
+                condition = location.condition()
+                print(condition.text())
+            else:
+                print("Must be at most a state")
+        else:
+            print("where?")
+            location = weather.lookup_by_location(input("Location: "))
+            condition = location.condition()
+            print(condition.text())
+    elif response=="change name":
+        print ("what would you like to change the name to?")
+        myname = input("new name: ")
+    elif response == "change my name":
+        print("what would you like to change your name to")
+        name = input ("new name: ")
+        print("hello, " + name)
+    elif "hello" in response:
+        print ("hi")
+    elif response == ("how do you spell your name"):
+        print ("j-a-r-v-i-a")
+    elif response == "calculator":
+        def add(x, y):
+            return x + y
+        def subtract(x, y):
+            return x - y
+        def multiply(x, y):
+            return x * y
+        def divide(x, y):
+            return x / y
+        print("Select operation.")
+        print("1.Add")
+        print("2.Subtract")
+        print("3.Multiply")
+        print("4.Divide")
+        choice = input("calculator>>> ")
+        num1 = int(input("calculator(Number 1)>>> "))
+        num2 = int(input("calculator(Number 2)>>> "))
+        if choice == '1':
+            print(num1,"+",num2,"=", add(num1,num2))
+        elif choice == '2':
+            print(num1,"-",num2,"=", subtract(num1,num2))
+        elif choice == '3':
+            print(num1,"*",num2,"=", multiply(num1,num2))
+        elif choice == '4':
+            print(num1,"/",num2,"=", divide(num1,num2))
+        else:
+            print("Invalid input")
+    elif "hi" in response:
+        print ("hello")
+    elif response == ("hello "+ myname):
+        print("hello " + name)
+    elif response == ("hi " + myname):
+        print ("hello " + name)
+    elif response[0:5] == ("i am "):
+        nxt = (0)
+        nxts = (1)
+        while response[nxt:nxts] != (""):
+            nxt = (nxt+1)
+            nxts=(nxts+1)
+        ups = tco
+        ups = (response[5:nxt])
+    elif response == "what am i":
+        tikr=(iam)
+        print(ups)
+    elif commands.count (response) == 1:
+        spot = commands.index (response)
+        print(action[spot])
+    elif response[0:2] == ("my"):
+        nxt = 0
+        nxts = 4
+        while response [nxt:nxts] != (" is "):
+            nxt = (nxt +1)
+            nxts = (nxts+1)
+            dk=nxts
+        jb=nxt
+        cmld= response[3:nxt]
+        nxts = (nxt+11)
+        if response[(nxt+4):(nxts-2)] == ("named"):
+            dilk= (nxts-1)
+            nxt = (nxt+0)
+            nxts =(nxts+1)
+            while response[nxt:nxts] != (""):
+                nxt = (nxt+1)
+                nxts=(nxts+1)
+            action.append("your " + cmld)
+            commands.append("who is " + response[dilk:nxts])
+        else:
+            nxt = (0)
+            nxts = (1)
+            while response[nxt:nxts] != (""):
+                nxt = (nxt+1)
+                nxts=(nxts+1)
+            commands.append("what is " + response[0:jb])
+            action.append(response[dk:nxt])
+    else:
+
+        command = response
+        response = input("i dont understand, would you like to add this as a new command>>> ")
+
+        if "y" in response and not "no" in response:
+            commands.append(command)
+            actionk = input("what should i say in response>>> ")
+            action.append(actionk)
+        else:
+            print("ok")
+
+
+
+
+
+
+
+
+
+
+
+
