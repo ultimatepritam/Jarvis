@@ -10,4 +10,6 @@ requests
 webbrowser
 glob
 PyDictionary
-tmdb
+tmdb-simple
+wolphramalpha
+vlc
