@@ -8,10 +8,16 @@ from weather import Weather
 import re
 import pyjokes
 import requests
+import wolframalpha
 import webbrowser
 import glob
 from PyDictionary import PyDictionary
 import tmdbsimple as tmdb
+import vlc
+edm='https://www.youtube.com/watch?v=3RMywOVg3'
+edml=['edm','dubstep','trance','electric']
+app_id='XPAQWX-W5LAG5ELYL'
+client=wolframalpha.Client(app_id)
 tmdb.API_KEY = '60222ace6396c345f94cc42eaac5dae5'
 doss = os.getcwd()
 i=0
@@ -43,10 +49,16 @@ action = []
 print ("hello")
 name = input ("what is your name>>> ")
 print ("hello " + name)
+def music():
+    instance=vlc.Instance('--input-repeat=-1', '--fullscreen')
+    player=instance.media_player_new()
+    media=instance.media_new(url)
+    player.set_media(media)
+    player.play()
 while 1==1:
     response = input("Main>>> ")
-    if response == "what time is it":
-        print(time.strftime("%I %M %p	"))
+    if response == "what time is it" or response=='what is the time':
+        print(time.strftime("%I")+':'+time.strftime('%M %p'))
     elif response == ("what is your favorite color"):
         print("purple")
     elif response == ("who are you"):
@@ -72,17 +84,10 @@ while 1==1:
 
     elif('how are you') in response or ('and you') in response or ('are you okay') in response:
         print('Im good, thanks')
-    elif  ('*') in response:
-        print("Right back atcha")
     elif ('your name') in response:
         print("Im Jarvia")
     elif ('how old are you') in response :
         print("none of your buisness")
-
-    elif ('you virgin') in response :
-        print('Do I look like Olive Oil to you?')
-
-
     elif('what is my location') in response or ('where am I') in response or ('where are you') in response :
         w = requests.get('http://api.openweathermap.org/data/2.5/weather?id=1275004&appid=5fc29900336d19d1d912723dc3d1e117')
         json_object = w.json()
@@ -93,19 +98,29 @@ while 1==1:
         print("The current position is "+rand1+" longitude and "+rand2+" latitude")
     elif('will you marry me') in response:
         print('I am sorry.. The person you are trying to contact is currently unavailable, please try again later or join the queue for your turn')
-    elif ('are you silly')in response or ('are you idiot') in response :
-        print("sometimes")
     elif('what is life') in response :
         print("Food")
-    elif ('.com') in response or ".org" in response:
-        Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
-        webbrowser.get(Chrome).open('http://www.'+response)
-        print ('Opening')
-    elif ('check my mail') in response or ('email') in response or ('mail') in response :
-        Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
-
-        webbrowser.get(Chrome).open('http://www.gmail.com')
-        print ('Opening mail')
+#    elif ret.code==200:
+#        webbrowser.open('http://'+response)
+#        print ('Opening')
+    elif 'open email' in response:
+        if mail==1:
+            webbrowser.open(email)
+            print ('Opening mail')
+        else:
+            esite=input('What email site do you use: ')
+            if 'gmail' in response:
+                mail=1
+                email='https://www.gmail.com'
+                webbrowser.open(email)
+            elif 'yahoo' in response:
+                mail=1
+                email='https://mail.yahoo.com'
+                webbrowser.open(email)
+            elif 'outlook' in response:
+                mail=1
+                email='https://outlook.live.com'
+                webbrowser.open(email)
 
     elif ('google search') in response :
         query = response
@@ -124,77 +139,23 @@ while 1==1:
         Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
         webbrowser.get(Chrome).open("https://www.google.be/maps/place/"+result+"/")
 
-
-
-    elif response != ('start music') and ('start') in response:
+    elif 'play' in response and 'music' in response:
+        music=input('What kind of music: ')
+        if music in edml:
+            url=edm
+        instance=vlc.Instance('--input-repeat=-1', '--fullscreen')
+        player=instance.media_player_new()
+        media=instance.media_new(url)
+        player.set_media(media)
+        player.play()
+    elif ('install python module') in response:
         query = response
-        stopwords = ['start']
-        querywords = query.split()
-        resultwords  = [word for word in querywords if word.lower() not in stopwords]
-        result = ' '.join(resultwords)
-        os.system('start ' + result)
-        print('starting '+result)
-
-
-    elif response != ('stop music') and ('stop') in response:
-        query = response
-        stopwords = ['stop']
-        querywords = query.split()
-        resultwords  = [word for word in querywords if word.lower() not in stopwords]
-        result = ' '.join(resultwords)
-        os.system('taskkill /im ' + result + '.exe /f')
-
-    elif ('install') in response:
-        query = response
-        stopwords = ['install']
+        stopwords = ['module']
         querywords = query.split()
         resultwords  = [word for word in querywords if word.lower() not in stopwords]
         result = ' '.join(resultwords)
         print("installing")
         os.system('python -m pip install ' + result)
-
-
-    elif ('sleep mode') in response:
-
-        print("good night")
-        os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
-
-    elif ('play music') in response:
-        mus = random.choice(glob.glob(doss + "\\music" + "\\*.mp3"))
-        os.system('chown -R user-id:group-id mus')
-        os.system('start ' + mus)
-
-    elif('stop music')in response:
-        os.system('taskkill /im wmplayer.exe /f')
-        print('Stopping Music...')
-
-
-    elif ('play video') in response:
-        vid = random.choice(glob.glob(doss + "\\video" + "\\*.mp4"))
-        os.system('chown -R user-id:group-id mus')
-        os.system('start ' + vid)
-
-    elif('stop video')in response:
-        os.system('taskkill /im wmplayer.exe /f')
-    elif ('temperature') in response:
-        w = requests.get('http://api.openweathermap.org/data/2.5/weather?id=1275004&appid=5fc29900336d19d1d912723dc3d1e117')
-        json_object = w.json()
-        temp_k = (float(json_object['main']['temp'])-273.15)
-        print("The current temperature is"+rand+"degree celsius")
-
-    elif ('movie search') in response :
-        query = response
-        stopwords = ['movie', 'search']
-        querywords = query.split()
-        resultwords  = [word for word in querywords if word.lower() not in stopwords]
-        result = ' '.join(resultwords)
-
-        search = tmdb.Search()
-        response = search.movie(query=result)
-        for s in search.results:
-            print(response)
-
-
     elif('subtract') in response :
         input = response
         (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
@@ -232,11 +193,6 @@ while 1==1:
         print(rand)
 
 
-    elif("who is there")in response:
-        print("Merry")
-
-    elif('merry who')in response:
-        print("Merry Christmas")
 
 
 
@@ -272,86 +228,18 @@ while 1==1:
             f=open(lstn+".txt", "a+")
             f.write(response[add1:add2])
             f.close()
-    elif "info on" in response:
-        try:
-            response = response[(response.find("info on")+8):len(response)]
-            print (wikipedia.summary(response, sentences=2))
-            print("More?")
-            cont=input("Wiki>>> ")
-            if "y" in cont and not "no" in cont:
-                print (wikipedia.summary(response, sentences=999999999))
-        except wikipedia.exceptions.PageError:
-            print("No results")
-    elif "what is" in response and not commands.count (response) == 1:
-        try:
-            response = response[(response.find("what is")+8):len(response)]
-            print (wikipedia.summary(response, sentences=2))
-            print("More?")
-            cont=input("Wiki>>> ")
-            if "y" in cont and not "no" in cont:
-                print (wikipedia.summary(response, sentences=999999999))
-        except wikipedia.exceptions.PageError:
-            print("No results")
-    elif "what are" in response:
-        try:
-            response = response[(response.find("what are")+9):len(response)]
-            print (wikipedia.summary(response, sentences=2))
-            print("More?")
-            cont=input("Wiki>>> ")
-            if "y" in cont and not "no" in cont:
-                print (wikipedia.summary(response, sentences=999999999))
-        except wikipedia.exceptions.PageError:
-            print("No results")
-    elif "what was" in response:
-        try:
-            response = response[(response.find("what is")+9):len(response)]
-            print (wikipedia.summary(response, sentences=2))
-            print("More?")
-            cont=input("Wiki>>> ")
-            if "y" in cont and not "no" in cont:
-                print (wikipedia.summary(response, sentences=999999999))
-        except wikipedia.exceptions.PageError:
-            print("No results")
-    elif "information on" in response:
-        try:
-            response = response[(response.find("information on")+15):len(response)]
-            print (wikipedia.summary(response, sentences=2))
-            print("More?")
-            cont=input("Wiki>>> ")
-            if "y" in cont and not "no" in cont:
-                print (wikipedia.summary(response, sentences=999999999))
-        except wikipedia.exceptions.PageError:
-            print("No results")
     elif response == "give me a random number":
         print (random.randint(1,100))
     elif response == "what is the date":
         print (time.strftime (" %A, %B %e, %Y"))
-    elif "who is" in response:
-        response = response[(response.find("who is")+7):len(response)]
-        print (response)
-        print (wikipedia.summary(response, sentences=2))
-        print(response)
-        print("More?")
-        cont=input("Wiki>>> ")
-        if "y" in cont and not "no" in cont:
-            print (wikipedia.summary(response, sentences=999999999))
-    elif "who was" in response:
-        response = response[(response.find("who was")+8):len(response)]
-        print (response)
-        print (wikipedia.summary(response, sentences=2))
-        print(response)
-        print("More?")
-        cont=input("Wiki>>> ")
-        if "y" in cont and not "no" in cont:
-            print (wikipedia.summary(response, sentences=999999999))
     elif "weather in " in response:
         wthr=(response.find("weather"))
         if "weather in " in response:
             wthr=((response.find("weather in "))+2)
             if wthr not in pycountry.countries:
                 location = weather.lookup_by_location(response[wthr:(len(response))])
-                condition = location.condition()
-                print(condition.text())
+                condition = location.condition
+                print(condition.text)
             else:
                 print("Must be at most a state")
         else:
@@ -444,6 +332,88 @@ while 1==1:
                 nxts=(nxts+1)
             commands.append("what is " + response[0:jb])
             action.append(response[dk:nxt])
+    elif "info on" in response:
+        try:
+            response = response[(response.find("info on")+8):len(response)]
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
+    elif "what is" in response and not commands.count (response) == 1:
+        try:
+            response = response[(response.find("what is")+8):len(response)]
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
+    elif "who is" in response:
+        response = response[(response.find("who is")+7):len(response)]
+        try:
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+            print (wikipedia.summary(response, sentences=2))
+            print(response)
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
+    elif "who was" in response:
+        response = response[(response.find("who was")+8):len(response)]
+        try:
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+
+            print (wikipedia.summary(response, sentences=2))
+            print(response)
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
+    elif "what are" in response:
+        try:
+            response = response[(response.find("what are")+9):len(response)]
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
+
+    elif "what was" in response:
+        try:
+            response = response[(response.find("what is")+9):len(response)]
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
+    elif "information on" in response or 'information about' in response or 'info on' in response or 'info about' in response:
+        try:
+            response = response[(response.find("information on")+15):len(response)]
+            res=client.query(response)
+            print(next(res.results).text)
+        except:
+
+            print (wikipedia.summary(response, sentences=2))
+            print("More?")
+            cont=input("Wiki>>> ")
+            if "y" in cont and not "no" in cont:
+                print (wikipedia.summary(response))
     else:
 
         command = response
