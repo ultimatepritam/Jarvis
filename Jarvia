@@ -14,8 +14,6 @@ import glob
 from PyDictionary import PyDictionary
 import tmdbsimple as tmdb
 import vlc
-edm='https://www.youtube.com/watch?v=3RMywOVg3'
-edml=['edm','dubstep','trance','electric']
 app_id='XPAQWX-W5LAG5ELYL'
 client=wolframalpha.Client(app_id)
 tmdb.API_KEY = '60222ace6396c345f94cc42eaac5dae5'
