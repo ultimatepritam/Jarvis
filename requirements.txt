@@ -1,6 +1,6 @@
 pycountry
 wikipedia-api
-weather
+weather-api
 pyjokes
 requests
 PyDictionary
