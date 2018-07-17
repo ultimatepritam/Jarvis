@@ -1,5 +1,5 @@
 pycountry
-wikipedia-api
+wikipedia
 weather-api
 pyjokes
 requests
