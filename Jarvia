@@ -13,7 +13,6 @@ import webbrowser
 import glob
 from PyDictionary import PyDictionary
 import tmdbsimple as tmdb
-import vlc
 app_id='XPAQWX-W5LAG5ELYL'
 client=wolframalpha.Client(app_id)
 tmdb.API_KEY = '60222ace6396c345f94cc42eaac5dae5'
@@ -47,12 +46,6 @@ action = []
 print ("hello")
 name = input ("what is your name>>> ")
 print ("hello " + name)
-def music():
-    instance=vlc.Instance('--input-repeat=-1', '--fullscreen')
-    player=instance.media_player_new()
-    media=instance.media_new(url)
-    player.set_media(media)
-    player.play()
 while 1==1:
     response = input("Main>>> ")
     if response == "what time is it" or response=='what is the time':
@@ -137,15 +130,6 @@ while 1==1:
         Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
         webbrowser.get(Chrome).open("https://www.google.be/maps/place/"+result+"/")
 
-    elif 'play' in response and 'music' in response:
-        music=input('What kind of music: ')
-        if music in edml:
-            url=edm
-        instance=vlc.Instance('--input-repeat=-1', '--fullscreen')
-        player=instance.media_player_new()
-        media=instance.media_new(url)
-        player.set_media(media)
-        player.play()
     elif ('install python module') in response:
         query = response
         stopwords = ['module']
