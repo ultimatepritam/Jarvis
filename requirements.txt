@@ -6,4 +6,5 @@ requests
 PyDictionary
 tmdbsimple
 wolframalpha
-vlc
+nltk
+autocorrect
