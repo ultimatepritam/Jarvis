@@ -1,4 +1,4 @@
-print(loading...)
+print('loading...')
 import setup
 setup.setup()
 import random
@@ -10,6 +10,7 @@ import os.path
 import wikipedia
 from weather import Weather
 import re
+from autocorrect import spell
 import pyjokes
 import requests
 import wolframalpha
@@ -23,10 +24,11 @@ import setup
 setup.setup()
 st1=[]
 hi = []
+thanks=[]
 yes=[]
 for syn in wordnet.synsets("hi"):
     for l in syn.lemmas():
-        hi.append(l.name())
+        hi.append(l.name())      
 app_id='XPAQWX-W5LAG5ELYL'
 client=wolframalpha.Client(app_id)
 tmdb.API_KEY = '60222ace6396c345f94cc42eaac5dae5'
@@ -63,6 +65,9 @@ print ("hello " + name)
 while 1==1:
     response = input("Main>>> ")
     st1=response.split()
+    for x in range(len(st1)):
+        st1[x]=(spell(st1[x]))
+    response=" ".join(str(x) for x in st1)
     if response == "what time is it" or response=='what is the time':
         print(time.strftime("%I")+':'+time.strftime('%M %p'))
     elif response == ("what is your favorite color"):
@@ -82,11 +87,8 @@ while 1==1:
         break
     elif ('thanks') in response or ('tanks') in response or ('thank you') in response:
         print('You are welcome', 'no problem')
-
-
     elif response == ('jarvia'):
         print('Yes Sir?', 'What can I do for you sir?')
-
     elif response=='exit' or response=='quit':
         sys.exit('quiting...')
     elif('how are you') in response or ('and you') in response or ('are you okay') in response:
@@ -107,9 +109,6 @@ while 1==1:
         print('I am sorry.. The person you are trying to contact is currently unavailable, please try again later or join the queue for your turn')
     elif('what is life') in response :
         print("Food")
-#    elif ret.code==200:
-#        webbrowser.open('http://'+response)
-#        print ('Opening')
     elif 'open email' in response:
         if mail==1:
             webbrowser.open(email)
@@ -128,7 +127,6 @@ while 1==1:
                 mail=1
                 email='https://outlook.live.com'
                 webbrowser.open(email)
-
     elif ('google search') in response :
         query = response
         stopwords = ['google', 'search']
@@ -145,8 +143,6 @@ while 1==1:
         result = ' '.join(resultwords)
         Chrome = ("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s")
         webbrowser.get(Chrome).open("https://www.google.be/maps/place/"+result+"/")
-
-
     elif ('install python module') in response:
         query = response
         stopwords = ['module']
@@ -160,24 +156,17 @@ while 1==1:
         (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
         result = int(b-d)
         print(result)
-
     elif('multiply') in response :
         input = response
         (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
         result = int(b*d)
-
         print(result)
-
     elif('divide') in response :
         input = response
         (a,b,c,d) =[t(s) for t,s in zip((str,int,str,int),re.search('^(\w+) (\d+) (\w+) (\d+)$',input).groups())]
         result = float(b/d)
-
         print(result)
-
-
     elif('define') in response:
-
         query = response
         stopwords = ['define']
         querywords = query.split()
@@ -185,18 +174,9 @@ while 1==1:
         result = ''.join(resultwords)
         rand = (dictionary.synonym(result))
         print(rand)
-
-
     elif('tell me a joke')in response:
         rand=(pyjokes.get_joke())
         print(rand)
-
-
-
-
-
-
-
     elif response == ("do you have a brother"):
         print("yes")
     elif response == "thanks" or response == "thank you":
@@ -371,7 +351,6 @@ while 1==1:
             res=client.query(response)
             print(next(res.results).text)
         except:
-
             print (wikipedia.summary(response, sentences=2))
             print(response)
             print("More?")
@@ -389,7 +368,6 @@ while 1==1:
             cont=input("Wiki>>> ")
             if "y" in cont and not "no" in cont:
                 print (wikipedia.summary(response))
-
     elif "what was" in response:
         try:
             response = response[(response.find("what is")+9):len(response)]
@@ -414,7 +392,6 @@ while 1==1:
             if "y" in cont and not "no" in cont:
                 print (wikipedia.summary(response))
     else:
-
         command = response
         response = input("i dont understand, would you like to add this as a new command>>> ")
 
