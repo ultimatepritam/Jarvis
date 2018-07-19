@@ -2,6 +2,7 @@ print('loading...')
 import setup
 setup.setup()
 import random
+from spellchecker import SpellChecker
 import time
 import sys
 import pycountry
@@ -10,7 +11,6 @@ import os.path
 import wikipedia
 from weather import Weather
 import re
-from autocorrect import spell
 import pyjokes
 import requests
 import wolframalpha
@@ -20,8 +20,7 @@ from PyDictionary import PyDictionary
 import tmdbsimple as tmdb
 import nltk
 from nltk.corpus import wordnet
-import setup
-setup.setup()
+spell = SpellChecker()
 st1=[]
 hi = []
 thanks=[]
@@ -66,7 +65,7 @@ while 1==1:
     response = input("Main>>> ")
     st1=response.split()
     for x in range(len(st1)):
-        st1[x]=(spell(st1[x]))
+        st1[x]=(spell.correction(st1[x]))
     response=" ".join(str(x) for x in st1)
     if response == "what time is it" or response=='what is the time':
         print(time.strftime("%I")+':'+time.strftime('%M %p'))
